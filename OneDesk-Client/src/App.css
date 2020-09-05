@@ -1,0 +1,117 @@
+html,
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin: 0;
+  height: auto;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto !important;
+}
+
+.center {
+  text-align: center;
+  font-size: 4vh;
+}
+
+.btn {
+  border: 5px solid #e84993 !important;
+}
+
+#customBtn {
+  display: inline-block;
+  background: white;
+  color: #444;
+  width: 200px;
+  border-radius: 5px;
+  border: thin solid #888;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+#customBtn:hover {
+  cursor: pointer;
+}
+
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 5px;
+  font-size: 15px;
+  padding-bottom: 10px;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#panel1bh-header:hover {
+  background-color: white !important;
+}
+
+.MuiTypography-root:hover,
+.Mui-expanded,
+.Mui-expanded:hover,
+b,
+b:hover {
+  background-color: white !important;
+}
+
+.wrap {
+  display: flex;
+  height: 100vh;
+  padding: 0 20px;
+}
+
+/* Blockquote main style */
+.quote {
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  color: #000000;
+  padding: 30px 0;
+  width: 100%;
+  max-width: 500px;
+  z-index: 1;
+  margin: 80px auto;
+  align-self: center;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
+  align-self: auto;
+  height: fit-content;
+}
+
+/* Blockquote header */
+.quote h1 {
+  position: relative;
+  color: #e84993;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+  align-self: auto;
+}
+
+/* Blockquote right double quotes */
+.quote:after {
+  position: absolute;
+  content: "”";
+  color: rgba(0, 0, 0, 1);
+  font-size: 10rem;
+  line-height: 0;
+  bottom: -43px;
+  right: 30px;
+  align-self: auto;
+}
+
+@media only screen and (max-width: 900px) {
+  body,
+  html {
+    overflow: auto;
+  }
+}
