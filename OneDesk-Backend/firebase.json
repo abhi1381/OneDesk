@@ -30,6 +30,9 @@
     },
     "hosting": {
       "port": "3000"
+    },
+    "ui": {
+      "enabled": true
     }
   }
 }

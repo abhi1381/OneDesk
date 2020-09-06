@@ -14,23 +14,14 @@ const { google } = require("googleapis");
 
 const app = express();
 
-// const refreshTokenStore = {};
-// const accessTokenCache = new NodeCache({ deleteOnExpire: true });
 
-const serviceAccount = require("./serviceAccountKey.json");
+const serviceAccount = require("../../../serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://ctmintask.firebaseio.com",
+  databaseURL: "https://onedeskdash.firebaseio.com"
 });
 
-// app.use(
-//   session({
-//     secret: Math.random().toString(36).substring(2),
-//     resave: false,
-//     saveUninitialized: true,
-//   })
-// );
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -67,6 +58,7 @@ const hubAuth =
 
 const jiraAuth =
   "https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=LcUQspyPyb8ATVkVEUN5KS4NuIxrI4mO&scope=read%3Ajira-user%20read%3Ajira-work%20write%3Ajira-work%20offline_access&redirect_uri=https%3A%2F%2Fctmintask.web.app%2F%23%2Fdash&state=${YOUR_USER_BOUND_VALUE}&response_type=code&prompt=consent";
+
 
 app.get("/auth", (req, res) => {
   res.send(authUrl);
@@ -141,7 +133,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const hubspotPendingTasks = async (agent) => {
       const data = await HubspotGetPendingTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -157,7 +149,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const hubspotAllTasks = async (agent) => {
       const data = await HubspotGetAllTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -173,7 +165,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const hubspotCompletedTasks = async (agent) => {
       const data = await HubspotGetCompletedTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -189,7 +181,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const hubspotStarredTasks = async (agent) => {
       const data = await HubspotGetStarredTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
 
@@ -205,7 +197,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const confluenceAllTasks = async (agent) => {
       const data = await ConfluenceGetAllTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -221,7 +213,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const confluenceCompletedTasks = async (agent) => {
       const data = await ConfluenceGetCompletdTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -237,7 +229,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const confluencePendingTasks = async (agent) => {
       const data = await ConfluenceGetPendingTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -253,7 +245,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const confluenceStarredTasks = async (agent) => {
       const data = await ConfluenceGetStarredTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
 
@@ -269,7 +261,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const jiraAllTasks = async (agent) => {
       const data = await JiraGetAllTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -285,7 +277,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const jiraCompletedTasks = async (agent) => {
       const data = await JiraGetCompletdTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -301,7 +293,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const jiraPendingTasks = async (agent) => {
       const data = await JiraGetPendingTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
       // console.log(JSON.stringify(data));
@@ -312,60 +304,60 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
       } else {
         agent.add("You don't have any Jira pending tasks");
       }
-	};
-	
-	const gsuiteAllTasks = async (agent) => {
-		
-		let data = await GsuiteAllTasks(
-		Email_UID[
-			request.body.originalDetectIntentRequest.payload.data.event.user.email
-			]
-		);
-		if(data.length){
-			data.forEach((element) => {
-				agent.add(new Card(element));
-			});
-		} else{
-			agent.add("You have No Tasks in your Gsuite");
-		}
-	};
+    };
 
-	const gsuiteCompletedTasks = async (agent) => {
-		let data = await GsuiteCompletedTasks(
-		Email_UID[
-			request.body.originalDetectIntentRequest.payload.data.event.user.email
-			]
-		);
-		//console.log("Length of data", data.length);
-		if(data.length){
-			data.forEach((element) => {
-				agent.add(new Card(element));
-			});
-		} else {
-			agent.add("Uh Oh! you have no completed Gsuite Tasks!");
-		}
-	};
+    const gsuiteAllTasks = async (agent) => {
 
-	const gsuitePendingTasks = async (agent) => {
-		let data = await GsuitePendingTasks(
-		Email_UID[
-			request.body.originalDetectIntentRequest.payload.data.event.user.email
-			]
-		);
-		console.log("Length of data ,", data.length);
-		if(data.length){
-			data.forEach((element) => {
-				agent.add(new Card(element));
-			});
-		} else {
-			agent.add("Congrats! You have no pending Gsuite tasks!");
-		}
-	}
+      let data = await GsuiteAllTasks(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      } else {
+        agent.add("You have No Tasks in your Gsuite");
+      }
+    };
+
+    const gsuiteCompletedTasks = async (agent) => {
+      let data = await GsuiteCompletedTasks(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      //console.log("Length of data", data.length);
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      } else {
+        agent.add("Uh Oh! you have no completed Gsuite Tasks!");
+      }
+    };
+
+    const gsuitePendingTasks = async (agent) => {
+      let data = await GsuitePendingTasks(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      console.log("Length of data ,", data.length);
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      } else {
+        agent.add("Congrats! You have no pending Gsuite tasks!");
+      }
+    }
 
     const jiraStarredTasks = async (agent) => {
       const data = await JiraGetStarredTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
 
@@ -381,7 +373,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     const gsuiteStarredTasks = async (agent) => {
       const data = await GsuiteGetStarredTasks(
         Email_UID[
-          request.body.originalDetectIntentRequest.payload.data.event.user.email
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
         ]
       );
 
@@ -396,158 +388,158 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
       }
     };
 
-	const gsuiteAllDocs = async (agent) => {
-		let data = await GsuiteAllDocs(
-		Email_UID[
-			request.body.originalDetectIntentRequest.payload.data.event.user.email
-			]
-		);
-		if(data.length){
-			data.forEach((element) => {
-				agent.add(new Card(element));
-			});
-		}
-		else{
-			//console.log("No Data");
-			agent.add("You have no tasks assigned in Google Docs");
-		}
-	};
+    const gsuiteAllDocs = async (agent) => {
+      let data = await GsuiteAllDocs(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("You have no tasks assigned in Google Docs");
+      }
+    };
 
-	const gsuiteAllSheets = async (agent) => {
-		let data = await GsuiteAllSheets(
-		Email_UID[
-			request.body.originalDetectIntentRequest.payload.data.event.user.email
-			]
-		);
-		if(data.length){
-			data.forEach((element) => {
-				agent.add(new Card(element));
-			});
-		}
-		else{
-			//console.log("No Data");
-			agent.add("You have no tasks assigned in Google Sheets");
-		}
-	};
+    const gsuiteAllSheets = async (agent) => {
+      let data = await GsuiteAllSheets(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("You have no tasks assigned in Google Sheets");
+      }
+    };
 
-	const gsuiteAllSlides = async (agent) => {
-		let data = await GsuiteAllSlides(
-		Email_UID[
-			request.body.originalDetectIntentRequest.payload.data.event.user.email
-			]
-		);
-		if(data.length){
-			data.forEach((element) => {
-				agent.add(new Card(element));
-			});
-		}
-		else{
-			//console.log("No Data");
-			agent.add("You have no tasks assigned in Google Slides");
-		}
-	};
+    const gsuiteAllSlides = async (agent) => {
+      let data = await GsuiteAllSlides(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("You have no tasks assigned in Google Slides");
+      }
+    };
 
-	const gsuiteCompletedDocs = async (agent) => {
-		let data = await GsuiteCompletedDocs(
-			Email_UID[
-				request.body.originalDetectIntentRequest.payload.data.event.user.email
-				]
-			);
-			if(data.length){
-				data.forEach((element) => {
-					agent.add(new Card(element));
-				});
-			}
-			else{
-				//console.log("No Data");
-				agent.add("Uh Oh! You have no completed google docs!");
-			}
-	};
+    const gsuiteCompletedDocs = async (agent) => {
+      let data = await GsuiteCompletedDocs(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("Uh Oh! You have no completed google docs!");
+      }
+    };
 
-	const gsuitePendingDocs = async (agent) => {
-		let data = await GsuitePendingDocs(
-			Email_UID[
-				request.body.originalDetectIntentRequest.payload.data.event.user.email
-				]
-			);
-			if(data.length){
-				data.forEach((element) => {
-					agent.add(new Card(element));
-				});
-			}
-			else{
-				//console.log("No Data");
-				agent.add("Congrats! You have no pending tasks in google docs!");
-			}
-	};
+    const gsuitePendingDocs = async (agent) => {
+      let data = await GsuitePendingDocs(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("Congrats! You have no pending tasks in google docs!");
+      }
+    };
 
-	const gsuiteCompletedSlides = async (agent) => {
-		let data = await GsuiteCompletedSlides(
-			Email_UID[
-				request.body.originalDetectIntentRequest.payload.data.event.user.email
-				]
-			);
-			if(data.length){
-				data.forEach((element) => {
-					agent.add(new Card(element));
-				});
-			}
-			else{
-				//console.log("No Data");
-				agent.add("Uh Oh! You have no completed google slides!");
-			}
-	};
+    const gsuiteCompletedSlides = async (agent) => {
+      let data = await GsuiteCompletedSlides(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("Uh Oh! You have no completed google slides!");
+      }
+    };
 
-	const gsuitePendingSlides = async (agent) => {
-		let data = await GsuitePendingSlides(
-			Email_UID[
-				request.body.originalDetectIntentRequest.payload.data.event.user.email
-				]
-			);
-			if(data.length){
-				data.forEach((element) => {
-					agent.add(new Card(element));
-				});
-			}
-			else{
-				//console.log("No Data");
-				agent.add("Congrats! You have no pending tasks in google slides!");
-			}
-	};
+    const gsuitePendingSlides = async (agent) => {
+      let data = await GsuitePendingSlides(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("Congrats! You have no pending tasks in google slides!");
+      }
+    };
 
-	const gsuiteCompletedSheets = async (agent) => {
-		let data = await GsuiteCompletedSheets(
-			Email_UID[
-				request.body.originalDetectIntentRequest.payload.data.event.user.email
-				]
-			);
-			if(data.length){
-				data.forEach((element) => {
-					agent.add(new Card(element));
-				});
-			}
-			else{
-				//console.log("No Data");
-				agent.add("Uh Oh! You have no completed google sheets!");
-			}
-	};
+    const gsuiteCompletedSheets = async (agent) => {
+      let data = await GsuiteCompletedSheets(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("Uh Oh! You have no completed google sheets!");
+      }
+    };
 
-	const gsuitePendingSheets = async (agent) => {
-		let data = await GsuitePendingSheets(
-			Email_UID[
-				request.body.originalDetectIntentRequest.payload.data.event.user.email
-				]
-			);
-			if(data.length){
-				data.forEach((element) => {
-					agent.add(new Card(element));
-				});
-			}
-			else{
-				//console.log("No Data");
-				agent.add("Congrats! You have no pending tasks in google sheets!");
-			}
-	};
+    const gsuitePendingSheets = async (agent) => {
+      let data = await GsuitePendingSheets(
+        Email_UID[
+        request.body.originalDetectIntentRequest.payload.data.event.user.email
+        ]
+      );
+      if (data.length) {
+        data.forEach((element) => {
+          agent.add(new Card(element));
+        });
+      }
+      else {
+        //console.log("No Data");
+        agent.add("Congrats! You have no pending tasks in google sheets!");
+      }
+    };
     // console.log("agent is ", agent);
 
     // Run the proper function handler based on the matched Dialogflow intent name
@@ -565,21 +557,21 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest(
     intentMap.set("Jira-all-tasks", jiraAllTasks);
     intentMap.set("Jira-completed-tasks", jiraCompletedTasks);
     intentMap.set("jira-starred-tasks", jiraStarredTasks);
-	intentMap.set("hubspot-starred-tasks", hubspotStarredTasks);
-	intentMap.set("Gsuite-All-Tasks", gsuiteAllTasks);
+    intentMap.set("hubspot-starred-tasks", hubspotStarredTasks);
+    intentMap.set("Gsuite-All-Tasks", gsuiteAllTasks);
     intentMap.set("Gsuite-starred-tasks", gsuiteStarredTasks);
-	intentMap.set("confluence-starred-tasks", confluenceStarredTasks);
-	intentMap.set("Gsuite-Completed-Tasks", gsuiteCompletedTasks);
-	intentMap.set("Gsuite-Pending-Tasks", gsuitePendingTasks);
-	intentMap.set("Gsuite-All-Docs", gsuiteAllDocs);
-	intentMap.set("Gsuite-All-Slides", gsuiteAllSlides);
-	intentMap.set("Gsuite-All-Sheets", gsuiteAllSheets);
-	intentMap.set("Gsuite-Completed-Docs", gsuiteCompletedDocs);
-	intentMap.set("Gsuite-Pending-Docs", gsuitePendingDocs);
-	intentMap.set("Gsuite-Completed-Slides", gsuiteCompletedSlides);
-	intentMap.set("Gsuite-Pending-Slides", gsuitePendingSlides);
-	intentMap.set("Gsuite-Completed-Sheets", gsuiteCompletedSheets);
-	intentMap.set("Gsuite-Pending-Sheets", gsuitePendingSheets);
+    intentMap.set("confluence-starred-tasks", confluenceStarredTasks);
+    intentMap.set("Gsuite-Completed-Tasks", gsuiteCompletedTasks);
+    intentMap.set("Gsuite-Pending-Tasks", gsuitePendingTasks);
+    intentMap.set("Gsuite-All-Docs", gsuiteAllDocs);
+    intentMap.set("Gsuite-All-Slides", gsuiteAllSlides);
+    intentMap.set("Gsuite-All-Sheets", gsuiteAllSheets);
+    intentMap.set("Gsuite-Completed-Docs", gsuiteCompletedDocs);
+    intentMap.set("Gsuite-Pending-Docs", gsuitePendingDocs);
+    intentMap.set("Gsuite-Completed-Slides", gsuiteCompletedSlides);
+    intentMap.set("Gsuite-Pending-Slides", gsuitePendingSlides);
+    intentMap.set("Gsuite-Completed-Sheets", gsuiteCompletedSheets);
+    intentMap.set("Gsuite-Pending-Sheets", gsuitePendingSheets);
     // intentMap.set('your intent name here', googleAssistantHandler);
     agent.handleRequest(intentMap);
   }
@@ -886,87 +878,87 @@ const JiraGetPendingTasks = async (uid) => {
 };
 
 const GsuiteAllTasks = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.get();
-		//console.log("Data is", data);
-		data.forEach(element => {
-			let widgets = {
-				title: "A task from " + element.data().sender,
-				text : element.data().task_desc, 
-				buttonText: "VISIT TASK",
-				buttonUrl: element.data().url,
-			};
-			TaskData.push(widgets);
-		});
-		//console.log("Done computing tasks");
-		return TaskData;
-	} catch (e){
-		console.log("Error is", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .get();
+    //console.log("Data is", data);
+    data.forEach(element => {
+      let widgets = {
+        title: "A task from " + element.data().sender,
+        text: element.data().task_desc,
+        buttonText: "VISIT TASK",
+        buttonUrl: element.data().url,
+      };
+      TaskData.push(widgets);
+    });
+    //console.log("Done computing tasks");
+    return TaskData;
+  } catch (e) {
+    console.log("Error is", e);
+    return TaskData;
+  }
 };
 
 const GsuitePendingTasks = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "open")
-			.get();
-		//console.log("HEre rn!");
-		data.forEach(element => {
-			let widgets = {
-				title: "A task from " + element.data().sender,
-				text : element.data().task_desc, 
-				buttonText: "VISIT TASK",
-				buttonUrl: element.data().url,
-			}
-			TaskData.push(widgets);
-		});
-		//console.log("OK!");
-		return TaskData;
-	}catch (e){
-		console.log("Error is, ",e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "open")
+      .get();
+    //console.log("HEre rn!");
+    data.forEach(element => {
+      let widgets = {
+        title: "A task from " + element.data().sender,
+        text: element.data().task_desc,
+        buttonText: "VISIT TASK",
+        buttonUrl: element.data().url,
+      }
+      TaskData.push(widgets);
+    });
+    //console.log("OK!");
+    return TaskData;
+  } catch (e) {
+    console.log("Error is, ", e);
+    return TaskData;
+  }
 };
 
 const GsuiteCompletedTasks = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "resolved")
-			.get();
-		data.forEach(element => {
-			let widgets = {
-				title: "A task from " + element.data().sender,
-				text : element.data().task_desc, 
-				buttonText: "VISIT TASK",
-				buttonUrl: element.data().url,
-			}
-			TaskData.push(widgets);
-		});
-		return TaskData;
-	}catch (e){
-		console.log("Exception Occured ", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "resolved")
+      .get();
+    data.forEach(element => {
+      let widgets = {
+        title: "A task from " + element.data().sender,
+        text: element.data().task_desc,
+        buttonText: "VISIT TASK",
+        buttonUrl: element.data().url,
+      }
+      TaskData.push(widgets);
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exception Occured ", e);
+    return TaskData;
+  }
 };
 
 
@@ -1023,296 +1015,287 @@ const GsuiteGetStarredTasks = async (uid) => {
 };
 
 const GsuiteAllDocs = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.get();
-		var exp = new RegExp("Google Docs");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .get();
+    var exp = new RegExp("Google Docs");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 const GsuitePendingDocs = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "open")
-			.get();
-		var exp = new RegExp("Google Docs");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "open")
+      .get();
+    var exp = new RegExp("Google Docs");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 const GsuiteCompletedDocs = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "resolved")
-			.get();
-		var exp = new RegExp("Google Docs");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "resolved")
+      .get();
+    var exp = new RegExp("Google Docs");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 const GsuiteAllSlides = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.get();
-		var exp = new RegExp("Google Slides");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .get();
+    var exp = new RegExp("Google Slides");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 const GsuitePendingSlides = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "open")
-			.get();
-		var exp = new RegExp("Google Slides");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "open")
+      .get();
+    var exp = new RegExp("Google Slides");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 const GsuiteCompletedSlides = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "resolved")
-			.get();
-		var exp = new RegExp("Google Slides");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "resolved")
+      .get();
+    var exp = new RegExp("Google Slides");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 
 const GsuiteAllSheets = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.get();
-		var exp = new RegExp("Google Sheets");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .get();
+    var exp = new RegExp("Google Sheets");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 const GsuitePendingSheets = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "open")
-			.get();
-		var exp = new RegExp("Google Sheets");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "open")
+      .get();
+    var exp = new RegExp("Google Sheets");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Exceotion Occured", e);
+    return TaskData;
+  }
 };
 
 const GsuiteCompletedSheets = async (uid) => {
-	let TaskData = [];
-	try{
-		const data = await db
-			.collection("users")
-			.doc(uid)
-			.collection("tasks")
-			.doc("gsuite")
-			.collection("data")
-			.where("status", "==", "resolved")
-			.get();
-		var exp = new RegExp("Google Sheets");
-		data.forEach((element) => {
-			var ref = (element.data().sender).toString();
-			var res = ref.match(exp);
-			if(res!==null)
-			{
-				let widgets = {
-					title: element.data().sender,
-					text: element.data().task_desc,
-					buttonText: "VISIT TASK",
-					buttonUrl: element.data().url,
-				  };
-				  TaskData.push(widgets);
-			}
-		});
-		return TaskData;
-	} catch(e){
-		console.log("Exceotion Occured", e);
-		return TaskData;
-	}
+  let TaskData = [];
+  try {
+    const data = await db
+      .collection("users")
+      .doc(uid)
+      .collection("tasks")
+      .doc("gsuite")
+      .collection("data")
+      .where("status", "==", "resolved")
+      .get();
+    var exp = new RegExp("Google Sheets");
+    data.forEach((element) => {
+      var ref = (element.data().sender).toString();
+      var res = ref.match(exp);
+      if (res !== null) {
+        let widgets = {
+          title: element.data().sender,
+          text: element.data().task_desc,
+          buttonText: "VISIT TASK",
+          buttonUrl: element.data().url,
+        };
+        TaskData.push(widgets);
+      }
+    });
+    return TaskData;
+  } catch (e) {
+    console.log("Excecution Occured", e);
+    return TaskData;
+  }
 };

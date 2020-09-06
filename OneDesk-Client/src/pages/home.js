@@ -61,10 +61,12 @@ const style = {
   width: "100px",
   height: "20px",
 };
+
 const Home = () => {
   const classes = useStyles();
   const [currentUser, setCurrentUser] = useState(null);
 
+  console.log(currentUser);
   useEffect(() => {
     setTimeout(() => {
       get_data("from: comments-noreply@docs.google.com");
@@ -105,9 +107,9 @@ const Home = () => {
         email: user.email,
         photoURL: user.photoURL,
         uid: user.uid,
-        isAdmin: adminStatus.data().isAdmin
-          ? adminStatus.data().isAdmin
-          : false,
+        // isAdmin: adminStatus.data().isAdmin
+        //   ? adminStatus.data().isAdmin
+        //   : false,
       };
       window.sessionStorage.setItem("user", JSON.stringify(userData));
       return user;
@@ -124,19 +126,25 @@ const Home = () => {
           <Paper className={classes.paper}>
             <Grid container spacing={3} style={{ margin: "30% auto" }}>
               <Grid item xs={12} sm={12}>
-                <Typography>
-                  <img
+                <Typography className={classes.gridText}>
+                  {/* <img
                     src="https://innovaccer.com/static/image/site-logo/innovaccer-logo-black.svg"
                     alt="Innovaccer"
-                  />
+                  /> */}
+                  <span style={{ color: "#FF1493", fontSize: "64px" }}>One</span> <span style={{ color: "#FF1493", fontSize: "64px" }}>Desk</span> <sup style={{ fontWeight: "bold", fontSize: "28px", color: "#212121" }}>Dash</sup>
                 </Typography>
+
               </Grid>
               <Grid item xs={12} sm={12}>
-                <Typography className={classes.gridText}>
-                  Your Personal Central Task Manager
+                <Typography className={classes.gridText} style={{
+                  color: "#757575"
+                }}>
+                  Your Personal Task Manager
                 </Typography>
-                <Typography className={classes.gridText}>
-                  A Dashboard, One for all.
+                <Typography className={classes.gridText} style={{
+                  color: "#757575"
+                }}>
+                  A <span style={{ color: "#000" }}>Dashboard</span>, One for all.
                 </Typography>
               </Grid>
             </Grid>
@@ -167,25 +175,25 @@ const Home = () => {
                       </Typography>
                     </div>
                   ) : (
-                    <div>
-                      <Typography className={classes.gridText}>
-                        Login into your account
+                      <div>
+                        <Typography className={classes.gridText}>
+                          Login into your account
                       </Typography>
-                      <Typography>
-                        <Button
-                          variant="contained"
-                          className={classes.loginButton}
-                          onClick={handleUser}
-                        >
-                          <img
-                            src="http://i.xp.io/2L6Jh5Os.png"
-                            style={{ padding: "10px" }}
-                          />
+                        <Typography>
+                          <Button
+                            variant="contained"
+                            className={classes.loginButton}
+                            onClick={handleUser}
+                          >
+                            <img
+                              src="http://i.xp.io/2L6Jh5Os.png"
+                              style={{ padding: "10px" }}
+                            />
                           Continue with Google
                         </Button>
-                      </Typography>
-                    </div>
-                  )}
+                        </Typography>
+                      </div>
+                    )}
                 </Paper>
               </Grid>
             </Grid>

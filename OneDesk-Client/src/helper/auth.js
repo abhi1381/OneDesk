@@ -10,7 +10,7 @@ function handleIsSignedIn(isSignedIn) {
   if (isSignedIn) {
     const auth2 = window.gapi.auth2.getAuthInstance();
     const currentUser = auth2.currentUser.get();
-    // console.log(currentUser);
+    console.log(currentUser);
     const profile = currentUser.getBasicProfile();
     // console.log("gapi: user signed in!", profile);
     const authResponse = currentUser.getAuthResponse(true);
@@ -18,6 +18,7 @@ function handleIsSignedIn(isSignedIn) {
       authResponse.id_token,
       authResponse.access_token
     );
+
     firebaseAuth.signInWithCredential(credential).then(({ user }) => {
       // console.log("firebase: user signed in!", {
       //   displayName: user.displayName,
@@ -49,13 +50,6 @@ new Promise((resolve, reject) => {
     });
   })
   .then(() => {
-    return window.gapi.client.load("analytics", "v3");
-  })
-  .then(() => {
-    console.log("gapi: analytics v3 loaded", window.gapi.client.analytics);
-    // listUsers();
-  })
-  .then(() => {
     const auth2 = window.gapi.auth2.getAuthInstance();
     auth2.isSignedIn.listen(handleIsSignedIn);
     handleIsSignedIn(auth2.isSignedIn.get());
@@ -64,6 +58,7 @@ new Promise((resolve, reject) => {
 export const signIn = async () => {
   const auth2 = window.gapi.auth2.getAuthInstance();
   if (auth2.isSignedIn.get()) {
+    console.log(auth2.isSignedIn.get())
     alert("already signed in");
     return;
   }
