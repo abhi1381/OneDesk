@@ -1,6 +1,6 @@
 # One Desk
 <!-- ![logo](https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/zez9iqg8lghajcaq65ai) -->
-## [Visit Your One Stop Dashboard ](https://ctmintask.web.app/#/)
+## [Visit Your One Stop Dashboard ](https://onedeskdash.web.app/#/)
 
 # Objective
 The objective of the One Desk is to increase User's productivity. Users currently use multiple productivity, task/project management tools which helps to document the process and makes sure the Business Objectives/Personal Objectives are achieved in a productive manner. Due to multiple siloed tools it's difficult for Users to maintain coherence to each tool in day to day operations. One Desk will help Users collate task/action items and work breakdowns from various tools and deliver them to their empployers/Clients in a timely and consolidated fashion. At an Organisation, It will also help the leadership team to monitor capacity and productivity of each employee Individually.
@@ -31,7 +31,7 @@ $ yarn start
 ### NOTE: Make sure that you are in master branch.
 
 ### Deployment
-One Desk is live and running [here](https://ctmintask.web.app/#/)
+One Desk is live and running [here](https://onedeskdash.web.app/#/)
 
 ### How to setup for first time!
     - Login with your Google account for Gsuite authorization.
